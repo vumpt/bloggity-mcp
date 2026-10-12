@@ -1,0 +1,16 @@
+{
+  "name": "bloggity",
+  "owner": { "name": "Bloggity", "url": "https://bloggity.io" },
+  "description": "Official Bloggity plugins for coding agents",
+  "plugins": [
+    {
+      "name": "bloggity",
+      "displayName": "Bloggity",
+      "description": "Manage your Bloggity blog from your coding agent: review the Tasks queue, schedule posts, accept keyword suggestions, and run Research Tasks over the Bloggity MCP server.",
+      "category": "productivity",
+      "keywords": ["bloggity","blog","seo","content","keywords","research","scheduling","mcp"],
+      "source": "./",
+      "homepage": "https://bloggity.io"
+    }
+  ]
+}
