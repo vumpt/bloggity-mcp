@@ -21,8 +21,27 @@ outside what this plugin covers and point to https://bloggity.io.
 ## Start
 
 1. Call `whoami` first. It triggers sign-in if needed and confirms the account.
+   If it fails for authentication, follow "New users and sign-in" below.
 2. Call `list_products` if you need a product id. With several products, group
    everything by product and name the product on each item.
+
+## New users and sign-in
+
+The user may not have a Bloggity account yet. The browser sign-in page has a
+"no account? sign up here" button that opens account creation; the new user
+then sets up their first blog and returns to the app. Because sign-in only
+starts when a tool needs it, the connection can still be unauthenticated when
+they come back.
+
+- If `whoami` (or any tool) fails with a sign-in error, tell the user to
+  finish signing in, or to sign up first if they have no account, then say you
+  will try again when they are done.
+- When they confirm, call `whoami` once more. If it works, carry on with what
+  they originally asked. If it still fails, ask them to reconnect the Bloggity
+  server in their client so sign-in restarts, then try once more.
+- If `list_products` returns nothing, the account has no blog yet. Send them to
+  the Bloggity dashboard to finish setup rather than retrying.
+- Do not retry in a loop, and do not ask for or handle their password.
 
 ## The Tasks queue: always list, then offer actions
 
