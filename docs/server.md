@@ -34,7 +34,7 @@ Access tokens are JWTs with `aud` = `https://mcp.bloggity.io/mcp`.
 Scopes: `openid`, `profile`, `email`, `offline_access`, `blog.read`, `blog.write`.
 
 Users can revoke any client under
-**Connected Apps** in the Bloggity dashboard; revocation takes effect immediately.
+**Connected Apps** at `https://backend.bloggity.io/connected-apps` (signed in with their Bloggity account); revocation takes effect immediately.
 
 ## Tools
 
@@ -44,7 +44,7 @@ Every tool calls the same service as its dashboard route.
 |---|---|---|
 | `whoami` | token only | Stable user id, name, email, nickname. Call first to trigger sign-in |
 | `list_products` | `blog.read` | List the user's blogs/products |
-| `list_todos` | `blog.read` | Tasks screen: topic tasks, keyword suggestions, research suggestions per product. Optional `productId` |
+| `list_todos` | `blog.read` | The Tasks screen, in the same priority order: topics to schedule, a keyword card when a product is running low on topics (hidden while deferred), and research suggestions awaiting a decision. Optional `productId` |
 | `list_research_topics` | `blog.read` | Research Tasks for a product. Requires `productId` |
 | `schedule_todo` | `blog.write` | Schedule a topic. `topicId`; optional `date`, `generate` (default false) |
 | `set_todo_status` | `blog.write` | `topicId` + `action`: `snooze`, `backlog`, `restore` |
@@ -64,5 +64,5 @@ Manual post writing is deliberately not exposed over MCP.
 - Every query is scoped to the authenticated user's team; a token can only touch
   that team's data.
 - The optional `X-Source-Name` header (`claude-plugin`, `cursor-plugin`, ...)
-  identifies which connector made the request. No other client data is sent.
+  names the connector for identification only; it does not affect access. No other client data is sent.
 - Tokens are never logged.
