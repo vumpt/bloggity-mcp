@@ -67,6 +67,71 @@ scheduled tasks. Offer actions by state:
 - Scheduled: cancel to free the day slot (`cancel_research_topic`), or reschedule
   by cancelling and scheduling again.
 
+## Common flows
+
+Use these as defaults. Always finish with what is outstanding and the next
+action you would suggest.
+
+**1. Check-in ("what's on my plate?").** `whoami`, `list_products`, then
+`list_todos`. Open with a one-line summary per product (for example "Acme Blog:
+3 topics, 1 keyword card, 2 research suggestions"), then walk through the items
+as in the Tasks queue section. If there is nothing to do, say the blog is
+covered and offer `list_research_topics`.
+
+**2. Keep the calendar covered.** Each topic item is a day in the product's
+forecast window that still has nothing scheduled. When the topic queue is
+short, Bloggity adds a keyword card so more topics can be created. Explain
+that link ("you're running low on topics, these keywords will create more")
+rather than presenting the keyword card as unrelated.
+
+**3. Fill my week.** Propose a plan before acting: topic A on day 1, topic B
+on day 2, and so on, using each product's `nextPublishDate` as the start.
+Show it as a short table, get one confirmation, then call `schedule_todo` once
+per topic in order (without a date, each call takes the next open day) and
+report the final dates. Do not use `generate: true` here unless asked.
+
+**4. Accepting keywords.** Suggestions are a starting set. Let the user take
+all, take some, and/or type their own keywords in the same call. Tell them
+new topics are created from accepted keywords and will appear on a later
+`list_todos`, so offer to re-check shortly. Deferring only hides the card
+until tomorrow.
+
+**5. Scheduling a topic.** Scheduled posts are written and published
+automatically on their date, with no separate approval step. State the date
+back to the user and get a clear yes before scheduling, especially for a
+picked date or a batch. `generate: true` only moves writing earlier and costs
+a credit; offer it only if the user wants the post written now.
+
+**6. Research Tasks.** A Research Task takes up a day slot on the calendar, so
+when scheduling one, name the date and mention it uses that day. Typical path:
+review suggestions, accept, schedule, and later cancel if plans change.
+
+**7. Snooze, backlog, restore.** Snooze hides a topic until tomorrow; backlog
+parks it; restore puts it back in the queue. There is no tool to list parked
+topics, so you can only restore an item whose id you saw earlier in this
+conversation. Say so if asked to bring back something you cannot see.
+
+**8. Several products.** Group by product, name the product in every question,
+and never apply an action across products without saying so.
+
+**9. After every write.** Confirm what changed in plain words (the date, the
+keywords added, the task cancelled). For anything surprising, call
+`list_todos` again and report the new state instead of assuming.
+
+## When something goes wrong
+
+- Sign-in or permission error: tell the user to reconnect the Bloggity server
+  in their client and approve access (read access lists; write access changes).
+- "Not found" or a stale id: re-run the list tool, then retry with the fresh id.
+- Never retry a failed write in a loop. Report it and ask.
+
+## What this plugin cannot do
+
+There is no tool to view the published calendar, read or edit post content,
+change voice, style, domain, or billing settings, or list parked topics. For
+those, send the user to the Bloggity dashboard instead of guessing. Do not
+claim a post is live or written unless a tool result says so.
+
 ## Safety rules
 
 - Reads need `blog.read`; changes need `blog.write`. If a write is refused for
