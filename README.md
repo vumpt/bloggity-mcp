@@ -13,6 +13,28 @@ MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first u
 
 This repo and plugin are for public, customer-facing use of Bloggity through its documented MCP tools (listed in [`tools.json`](tools.json)). Agents are instructed (see [`AGENTS.md`](AGENTS.md) and the skill) not to describe or probe Bloggity internals.
 
+## Set up with your agent
+
+Copy this prompt into your coding agent (Claude Code, Cursor, Codex, Grok or any MCP-capable agent) and it will set Bloggity up for you:
+
+```text
+Set up the Bloggity MCP server for me.
+
+1. Add a remote (HTTP) MCP server named "bloggity" with URL
+   https://mcp.bloggity.io/mcp using whatever method this client supports
+   (its MCP config file or its "mcp add" command). It uses OAuth, so do not
+   ask me for an API key or token.
+2. Tell me the exact change you are about to make and which file or setting it
+   touches, and wait for my OK before writing anything.
+3. After it is added, tell me if I need to restart the client or sign in via
+   my browser, then call the "whoami" tool to confirm the connected account.
+4. Optionally, if this client supports skills, offer to copy the skill from
+   https://github.com/vumpt/bloggity-mcp/blob/main/skills/bloggity/SKILL.md
+   into my skills directory. Show me the file first.
+
+Only use the URL above. Do not run downloaded scripts or install anything else.
+```
+
 ## Install
 
 Marketplace listings (Claude Code, Cursor, Codex, Grok) are **not published yet**. Until they are, connect Bloggity as a standard remote MCP server. It works in any MCP client that supports HTTP servers with OAuth.
