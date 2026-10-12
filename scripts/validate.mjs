@@ -48,12 +48,14 @@ const skill = await readFile("skills/bloggity/SKILL.md", "utf8").catch(() => "")
 if (!/^---\nname: .+\ndescription: .+\n---\n/.test(skill)) errors.push("skills/bloggity/SKILL.md: bad frontmatter");
 
 // Tool surface: docs and skill may only reference tools in tools.json.
-const allow = new Set((await json("tools.json"))?.tools ?? []);
+const toolsFile = await json("tools.json");
+const allow = new Set(toolsFile?.tools ?? []);
+const kinds = new Set(toolsFile?.outputKinds ?? []);
 const toolLike = /`([a-z]+(?:_[a-z]+)+)`/g;
 for (const f of ["skills/bloggity/SKILL.md", "docs/server.md", "README.md"]) {
   const text = await readFile(f, "utf8").catch(() => "");
   for (const [, id] of text.matchAll(toolLike)) {
-    if (!allow.has(id) && !["offline_access"].includes(id)) errors.push(`${f}: \`${id}\` is not in tools.json`);
+    if (!allow.has(id) && !kinds.has(id) && !["offline_access"].includes(id)) errors.push(`${f}: \`${id}\` is not in tools.json`);
   }
 }
 const server = await readFile("docs/server.md", "utf8").catch(() => "");

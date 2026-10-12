@@ -1,10 +1,23 @@
 {
   "_comment": "Canonical allowlist of the public MCP tools this repo may reference. Mirrors what the hosted server returns from tools/list. Add a tool here only when it is intentionally customer-facing.",
   "tools": [
-    "whoami", "list_products", "list_todos", "list_research_topics",
-    "schedule_todo", "set_todo_status",
-    "accept_keyword_suggestions", "defer_keyword_suggestions",
-    "accept_research_topic", "schedule_research_topic",
-    "cancel_research_topic", "dismiss_research_topic", "backlog_research_topic"
+    "whoami",
+    "list_products",
+    "list_todos",
+    "list_research_topics",
+    "schedule_todo",
+    "set_todo_status",
+    "accept_keyword_suggestions",
+    "defer_keyword_suggestions",
+    "accept_research_topic",
+    "schedule_research_topic",
+    "cancel_research_topic",
+    "dismiss_research_topic",
+    "backlog_research_topic"
+  ],
+  "outputKinds": [
+    "topic",
+    "add_keywords",
+    "add_research"
   ]
 }
