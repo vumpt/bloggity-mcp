@@ -20,8 +20,9 @@ outside what this plugin covers and point to https://bloggity.io.
 
 ## Start
 
-1. Call `whoami` first. It triggers sign-in if needed and confirms the account.
-   If it fails for authentication, follow "New users and sign-in" below.
+1. Call `whoami` first. It triggers sign-in if needed, confirms the account,
+   and returns the `plan` and remaining `credits`. If it fails for
+   authentication, follow "New users and sign-in" below.
 2. Call `list_products` if you need a product id. With several products, group
    everything by product and name the product on each item.
 
@@ -42,6 +43,28 @@ they come back.
 - If `list_products` returns nothing, the account has no blog yet. Send them to
   the Bloggity dashboard to finish setup rather than retrying.
 - Do not retry in a loop, and do not ask for or handle their password.
+
+## Credits
+
+Each post written and each Research Task costs 1 credit. Free accounts get
+only a few per month (see `credits`, `monthlyCredits`, `nextResetAt` from
+`whoami`), so mention the balance whenever you propose several posts or
+research tasks ("you have 3 credits; this plan uses 9").
+
+Scheduling is never blocked by credits. Posts and research are paid for on
+their day, so a user can schedule more than they can currently afford and fix
+it later by upgrading or waiting for the reset. `schedule_todo` and
+`schedule_research_topic` return `out_of_credits`:
+
+- `false`: everything scheduled so far is covered. Say nothing about credits.
+- `true`: the item **was scheduled**, but the credits left don't cover
+  everything on the calendar. Confirm the schedule as normal, then tell the user
+  once (not after every call in a batch; summarise at the end) that some
+  scheduled items will fail to write on their day unless they upgrade in the
+  Bloggity dashboard (or credits reset on `nextResetAt`). Upgrading in time
+  means nothing needs rescheduling. Do **not** unschedule, skip, or refuse to
+  schedule items because of low credits, and do not retry.
+- Never set `generate: true` when `credits` is 0, and ask first otherwise.
 
 ## The Tasks queue: always list, then offer actions
 
@@ -119,10 +142,12 @@ until tomorrow.
 automatically on their date, with no separate approval step. State the date
 back to the user and get a clear yes before scheduling, especially for a
 picked date or a batch. `generate: true` only moves writing earlier and costs
-a credit; offer it only if the user wants the post written now.
+a credit; offer it only if the user wants the post written now. Check
+`out_of_credits` in the result as described under Credits.
 
 **6. Research Tasks.** A Research Task takes up a day slot on the calendar, so
-when scheduling one, name the date and mention it uses that day. Typical path:
+when scheduling one, name the date, mention it uses that day, and that it
+costs 1 credit (handle `out_of_credits` as described under Credits). Typical path:
 review suggestions, accept, schedule, and later cancel if plans change.
 
 **7. Snooze, backlog, restore.** Snooze hides a topic until tomorrow; backlog

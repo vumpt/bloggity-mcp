@@ -42,16 +42,16 @@ Every tool calls the same service as its dashboard route.
 
 | Tool | Scope | Description |
 |---|---|---|
-| `whoami` | token only | Stable user id, name, email, nickname. Call first to trigger sign-in |
+| `whoami` | token only | Stable user id, name, email, nickname, plus `plan`, `credits`, `monthlyCredits`, `nextResetAt`. Call first to trigger sign-in |
 | `list_products` | `blog.read` | List the user's blogs/products |
 | `list_todos` | `blog.read` | Tasks screen: topic tasks, keyword suggestions, research suggestions per product. Optional `productId` |
 | `list_research_topics` | `blog.read` | Research Tasks for a product. Requires `productId` |
-| `schedule_todo` | `blog.write` | Schedule a topic. `topicId`; optional `date`, `generate` (default false) |
+| `schedule_todo` | `blog.write` | Schedule a topic. `topicId`; optional `date`, `generate` (default false). Returns `out_of_credits` |
 | `set_todo_status` | `blog.write` | `topicId` + `action`: `snooze`, `backlog`, `restore` |
 | `accept_keyword_suggestions` | `blog.write` | Promote suggested (and optional manual) keywords |
 | `defer_keyword_suggestions` | `blog.write` | Defer a product's keyword suggestions until tomorrow |
 | `accept_research_topic` | `blog.write` | Accept a proposed Research Task, optionally scheduling it |
-| `schedule_research_topic` | `blog.write` | Schedule a Research Task (`id`, `date`) |
+| `schedule_research_topic` | `blog.write` | Schedule a Research Task (`id`, `date`). Returns `out_of_credits` |
 | `cancel_research_topic` | `blog.write` | Cancel a scheduled Research Task |
 | `dismiss_research_topic` | `blog.write` | Decline proposals (empty ids = all pending) |
 | `backlog_research_topic` | `blog.write` | Send proposals to the research backlog (~7 days) |
