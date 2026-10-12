@@ -21,7 +21,7 @@ for (const dir of manifests) {
   const m = await json(`${dir}/plugin.json`);
   if (!m) continue;
   if (!kebab.test(m.name ?? "")) errors.push(`${dir}: name must be kebab-case`);
-  for (const k of ["displayName", "version", "description", "homepage", "license"]) {
+  for (const k of ["version", "description", "homepage", "license"]) {
     if (!m[k]) errors.push(`${dir}: missing ${k}`);
   }
   versions.add(m.version);
@@ -31,14 +31,18 @@ for (const dir of manifests) {
 }
 if (versions.size > 1) errors.push(`versions differ across manifests: ${[...versions]}`);
 
-const mcpFiles = [".mcp.json", "agents/claude/.mcp.json", "agents/cursor/mcp.json", "agents/codex/mcp.json", "agents/grok/mcp.json"];
+const mcpFiles = [".mcp.json", "mcp.json", "agents/codex/.mcp.json"];
 for (const f of mcpFiles) {
   const c = await json(f);
   if (c && !/^https:\/\//.test(c.mcpServers?.bloggity?.url ?? "")) errors.push(`${f}: bloggity url must be https`);
 }
 
 await json(".claude-plugin/marketplace.json");
-await json("docs/grok-marketplace-entry.json");
+await json(".agents/plugins/marketplace.json");
+const grok = await json("docs/grok-marketplace-entry.json");
+if (grok && (grok.source?.source !== "url" || !grok.source?.url)) errors.push("docs/grok-marketplace-entry.json: remote source must be {source:\"url\", url, sha}");
+const codex = await json(".codex-plugin/plugin.json");
+if (codex && !codex.interface?.displayName) errors.push(".codex-plugin: interface.displayName required");
 
 const skill = await readFile("skills/bloggity/SKILL.md", "utf8").catch(() => "");
 if (!/^---\nname: .+\ndescription: .+\n---\n/.test(skill)) errors.push("skills/bloggity/SKILL.md: bad frontmatter");

@@ -3,7 +3,7 @@
     "bloggity": {
       "type": "http",
       "url": "https://mcp.bloggity.io/mcp",
-      "headers": { "X-Source-Name": "claude-plugin" }
+      "http_headers": { "X-Source-Name": "codex-plugin" }
     }
   }
 }

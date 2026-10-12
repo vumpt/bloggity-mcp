@@ -7,7 +7,5 @@
   "homepage": "https://bloggity.io",
   "repository": "https://github.com/vumpt/bloggity-mcp",
   "license": "MIT",
-  "keywords": ["bloggity","blog","seo","content","keywords","research","scheduling","mcp"],
-  "skills": "./skills/",
-  "mcpServers": "./agents/claude/.mcp.json"
+  "keywords": ["bloggity", "blog", "seo", "content", "research", "mcp"]
 }

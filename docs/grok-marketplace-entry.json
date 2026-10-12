@@ -1,13 +1,13 @@
 {
   "name": "bloggity",
   "description": "Manage your Bloggity blog from your coding agent: review the Tasks queue, schedule posts, accept keyword suggestions, and run Research Tasks.",
-  "homepage": "https://bloggity.io",
   "category": "productivity",
-  "keywords": ["bloggity", "blog-seo", "content-calendar"],
-  "domains": ["bloggity.io"],
   "source": {
-    "type": "git",
-    "url": "https://github.com/vumpt/bloggity-mcp",
+    "source": "url",
+    "url": "https://github.com/vumpt/bloggity-mcp.git",
     "sha": "REPLACE_WITH_40_CHAR_COMMIT_SHA"
-  }
+  },
+  "homepage": "https://bloggity.io",
+  "keywords": ["bloggity", "bloggity blog", "bloggity seo"],
+  "domains": ["bloggity.io"]
 }

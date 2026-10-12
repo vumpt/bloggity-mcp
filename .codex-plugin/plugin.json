@@ -1,13 +1,29 @@
 {
   "name": "bloggity",
-  "displayName": "Bloggity",
   "version": "0.1.0",
   "description": "Manage your Bloggity blog from your coding agent: review the Tasks queue, schedule posts, accept keyword suggestions, and run Research Tasks over the Bloggity MCP server.",
   "author": { "name": "Bloggity", "url": "https://bloggity.io" },
   "homepage": "https://bloggity.io",
   "repository": "https://github.com/vumpt/bloggity-mcp",
   "license": "MIT",
-  "keywords": ["bloggity","blog","seo","content","keywords","research","scheduling","mcp"],
+  "keywords": ["bloggity", "blog", "seo", "content", "research", "mcp"],
   "skills": "./skills/",
-  "mcpServers": "./agents/codex/mcp.json"
+  "mcpServers": "./agents/codex/.mcp.json",
+  "interface": {
+    "displayName": "Bloggity",
+    "shortDescription": "Manage your Bloggity blog's Tasks queue, keywords and research.",
+    "longDescription": "Review your Bloggity Tasks queue, schedule post topics, accept or defer keyword suggestions, and manage Research Tasks from your coding agent. Sign in with your Bloggity account in the browser; access is limited to your own team's data.",
+    "developerName": "Bloggity",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "websiteURL": "https://bloggity.io",
+    "brandColor": "#111827",
+    "logo": "./assets/logo.svg",
+    "composerIcon": "./assets/logo.svg",
+    "defaultPrompt": [
+      "Show my Bloggity Tasks queue",
+      "Schedule my next Bloggity topic on the next open day",
+      "List the research suggestions for my blog"
+    ]
+  }
 }

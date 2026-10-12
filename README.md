@@ -15,63 +15,42 @@ This repo and plugin are for public, customer-facing use of Bloggity through its
 
 ## Install
 
-### Claude Code
+Marketplace listings (Claude Code, Cursor, Codex, Grok) are **not published yet**. Until they are, connect Bloggity as a standard remote MCP server. It works in any MCP client that supports HTTP servers with OAuth.
 
-```
-/plugin marketplace add vumpt/bloggity-mcp
-/plugin install bloggity@bloggity
-```
+**Server URL:** `https://mcp.bloggity.io/mcp` (transport: Streamable HTTP; auth: OAuth, browser sign-in on first use)
 
-Then run `/mcp`, select `bloggity`, and complete browser sign-in. If you added the server by hand before, remove it first to avoid two connections.
-
-### Cursor
-
-Marketplace listing is pending review. Until then, add the server to `~/.cursor/mcp.json`:
+Generic config (most clients accept this shape):
 
 ```json
 {
   "mcpServers": {
     "bloggity": {
       "type": "http",
-      "url": "https://mcp.bloggity.io/mcp",
-      "headers": { "X-Source-Name": "cursor-plugin" }
+      "url": "https://mcp.bloggity.io/mcp"
     }
   }
 }
 ```
 
-Or install this repo as a local plugin (`.cursor-plugin/plugin.json`).
-
-### Grok
+Client-specific shortcuts:
 
 ```
-grok plugin install https://github.com/vumpt/bloggity-mcp
-```
-
-Marketplace listing is pending; see [docs/marketplaces.md](docs/marketplaces.md). Complete OAuth on first use.
-
-### Codex
-
-```
-codex mcp add bloggity --url https://mcp.bloggity.io/mcp
-codex mcp login bloggity
-```
-
-### Claude.ai, Cowork and ChatGPT
-
-Add a custom connector pointing at `https://mcp.bloggity.io/mcp` and sign in through the browser.
-
-### Any MCP client (no plugin)
-
-Add an HTTP server with URL `https://mcp.bloggity.io/mcp`. Claude Code example:
-
-```
+# Claude Code
 claude mcp add --transport http bloggity https://mcp.bloggity.io/mcp
+
+# Codex
+codex mcp add bloggity --url https://mcp.bloggity.io/mcp
 ```
 
-### Skill only
+- **Cursor:** add the generic config (without `type`) to `~/.cursor/mcp.json` or the project's `.cursor/mcp.json`.
+- **Claude.ai, Cowork, ChatGPT:** add a custom connector with the server URL and sign in through the browser.
+- **Other clients:** use the client's "add remote/HTTP MCP server" option with the URL above.
 
-Copy `skills/bloggity/` into your agent's skills directory and add the MCP server by hand.
+After connecting, ask the agent to run `whoami` to trigger sign-in and confirm the account.
+
+### Optional: the skill
+
+`skills/bloggity/SKILL.md` teaches the agent the Tasks workflow and its safety rules. Copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`).
 
 ## Data handling
 
@@ -90,12 +69,13 @@ OAuth 2.1 with PKCE and dynamic client registration. Scopes: `blog.read` for lis
 
 | Path | Consumed by |
 |---|---|
-| `.cursor-plugin/` | Cursor |
-| `.claude-plugin/` | Claude Code plugin and marketplace |
-| `.codex-plugin/` | Codex |
-| `.grok-plugin/` | Grok Build |
-| `.mcp.json` | Generic MCP config (Grok at root) |
-| `agents/<client>/` | Per-client MCP server config |
+| `.claude-plugin/` | Claude Code plugin manifest and marketplace |
+| `.cursor-plugin/` | Cursor plugin manifest |
+| `.codex-plugin/`, `.agents/plugins/` | Codex plugin manifest and marketplace |
+| `.grok-plugin/` | Grok Build plugin manifest |
+| `.mcp.json` | MCP config read by Claude Code and Grok Build |
+| `mcp.json` | MCP config read by Cursor |
+| `agents/codex/.mcp.json` | MCP config referenced by the Codex manifest |
 | `skills/bloggity/` | Canonical Agent Skill |
 | `assets/` | Logo |
 | `docs/` | Server reference, marketplace submission guides |

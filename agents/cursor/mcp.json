@@ -1,9 +1,0 @@
-{
-  "mcpServers": {
-    "bloggity": {
-      "type": "http",
-      "url": "https://mcp.bloggity.io/mcp",
-      "headers": { "X-Source-Name": "cursor-plugin" }
-    }
-  }
-}
