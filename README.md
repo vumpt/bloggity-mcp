@@ -85,7 +85,7 @@ Requests go to `mcp.bloggity.io` (tool calls) and `backend.bloggity.io` (OAuth).
 
 No Bloggity account yet? The sign-in page that opens on first use has a "no account? sign up here" button. Create your account and set up your blog, then ask your assistant to try again. If the connection still shows as signed out, reconnect the Bloggity server in your client to restart sign-in.
 
-OAuth 2.1 with PKCE and dynamic client registration. Scopes: `blog.read` for listing, `blog.write` for scheduling and accepting suggestions. Revoke any client at **https://backend.bloggity.io/connected-apps** (sign in with your Bloggity account); access ends immediately.
+OAuth 2.1 with PKCE. Scopes: `blog.read` for listing, `blog.write` for scheduling and accepting suggestions. Revoke any client at **https://backend.bloggity.io/connected-apps** (sign in with your Bloggity account); access ends immediately.
 
 ## Safety
 

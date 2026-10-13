@@ -9,36 +9,30 @@ Bloggity backend or frontend code.
 | Purpose | URL |
 |---|---|
 | MCP (Streamable HTTP, JSON responses) | `https://mcp.bloggity.io/mcp` |
-| Protected-resource metadata (RFC 9728) | `https://mcp.bloggity.io/.well-known/oauth-protected-resource/mcp` |
 | OAuth authorization server | `https://backend.bloggity.io` |
 | Health | `https://mcp.bloggity.io/health` |
 
 
-## Protocol behaviour
+## Connecting
 
-- JSON-RPC 2.0: `initialize`, `notifications/initialized`, `tools/list`,
-  `tools/call`; batches supported. `GET /mcp` returns 405 (no SSE).
-- `initialize` and `tools/list` are open, so clients can discover tools before
-  sign-in. `tools/call` requires a Bearer token; failures return a transport-level
-  `401`/`403` with `WWW-Authenticate` pointing at the protected-resource metadata.
-- `tools/list` always returns the full catalogue; each tool declares its OAuth
-  requirement in `securitySchemes`.
+- Streamable HTTP; add the server URL to any MCP client that supports remote
+  servers.
+- Tool discovery works before sign-in. Calling a tool requires signing in, and
+  your client will prompt you through the browser.
 
 ## Authentication
 
-OAuth 2.1 with PKCE (S256), RFC 8707 resource indicators, and either Dynamic
-Client Registration or Client ID Metadata Documents (hosts allowed:
-`claude.ai`, `claude.com`, `anthropic.com`, `chatgpt.com`, `openai.com`).
-Access tokens are JWTs with `aud` = `https://mcp.bloggity.io/mcp`.
+OAuth 2.1 with PKCE; sign in with your Bloggity account in the browser.
 
-Scopes: `openid`, `profile`, `email`, `offline_access`, `blog.read`, `blog.write`.
+Scopes: `blog.read` (listing) and `blog.write` (scheduling and accepting
+suggestions).
 
-Users can revoke any client under
-**Connected Apps** at `https://backend.bloggity.io/connected-apps` (signed in with their Bloggity account); revocation takes effect immediately.
+You can revoke any connected client under
+**Connected Apps** at `https://backend.bloggity.io/connected-apps` (signed in with your Bloggity account); revocation takes effect immediately.
 
 ## Tools
 
-Every tool calls the same service as its dashboard route.
+Each tool mirrors an action available in the Bloggity dashboard.
 
 | Tool | Scope | Description |
 |---|---|---|
