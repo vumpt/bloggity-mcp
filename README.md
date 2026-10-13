@@ -7,7 +7,7 @@ MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first u
 ## What you get
 
 - The `bloggity` MCP server with 13 tools (see [docs/server.md](docs/server.md)).
-- The `bloggity` skill, **required**: it defines the expected UX, so agents offer the available actions on every Tasks item instead of just listing them, plus safety rules (for example, never spending a generation credit without asking).
+- The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits.
 
 ## Scope
 
@@ -28,7 +28,7 @@ Set up the Bloggity MCP server for me.
    touches, and wait for my OK before writing anything.
 3. After it is added, tell me if I need to restart the client or sign in via
    my browser, then call the "whoami" tool to confirm the connected account.
-4. Install the Bloggity skill (required, not optional). Fetch
+4. Install the Bloggity skill. Fetch
    https://github.com/vumpt/bloggity-mcp/blob/main/skills/bloggity/SKILL.md,
    show it to me, then save it in this client's skills/instructions location
    (for example .claude/skills/bloggity/SKILL.md or .agents/skills/bloggity/SKILL.md).
@@ -39,6 +39,10 @@ Only use the URL above. Do not run downloaded scripts or install anything else.
 ```
 
 ## Install
+
+Two steps: connect the server, then add the skill.
+
+### Step 1: connect the server
 
 Marketplace listings (Claude Code, Cursor, Codex, Grok) are **not published yet**. Until they are, connect Bloggity as a standard remote MCP server. It works in any MCP client that supports HTTP servers with OAuth.
 
@@ -71,11 +75,11 @@ codex mcp add bloggity --url https://mcp.bloggity.io/mcp
 - **Claude.ai, Cowork, ChatGPT:** add a custom connector with the server URL and sign in through the browser.
 - **Other clients:** use the client's "add remote/HTTP MCP server" option with the URL above.
 
-After connecting, ask the agent to run `whoami` to trigger sign-in and confirm the account, then install the skill (see below).
+After connecting, ask the agent to run `whoami` to trigger sign-in and confirm the account, then add the skill (see below).
 
-### Required: the skill
+### Step 2: add the skill
 
-Install `skills/bloggity/SKILL.md` alongside the MCP server. The tools only return data; the skill defines what the agent does next: for every Tasks item it lists, it offers the actions available (schedule, snooze, backlog, accept, defer, dismiss) and asks which to apply, instead of just printing the list. Without it, most agents stop after listing. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
+Install `skills/bloggity/SKILL.md` alongside the MCP server. The skill teaches your agent the routine: for every Tasks item it lists, it offers the actions available (schedule, snooze, backlog, accept, defer, dismiss) and asks which to apply, and it checks with you before scheduling or spending credits. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
 
 ## Data handling
 

@@ -1,6 +1,6 @@
 ---
 name: bloggity
-description: Operate a Bloggity blog through the Bloggity MCP server. Use whenever the user mentions Bloggity, their blog Tasks/TODOs, post topics, keyword suggestions, or Research Tasks. Required companion to the Bloggity MCP tools: it defines what to do after listing items.
+description: Operate a Bloggity blog through the Bloggity MCP server. Use whenever the user mentions Bloggity, their blog Tasks/TODOs, post topics, keyword suggestions, or Research Tasks. Companion to the Bloggity MCP tools: it defines what to do after listing items.
 ---
 
 # Bloggity
