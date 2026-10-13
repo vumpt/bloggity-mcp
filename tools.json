@@ -15,6 +15,9 @@
     "dismiss_research_topic",
     "backlog_research_topic"
   ],
+  "responseFields": [
+    "out_of_credits"
+  ],
   "outputKinds": [
     "topic",
     "add_keywords",
