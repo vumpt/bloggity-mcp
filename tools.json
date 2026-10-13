@@ -1,5 +1,5 @@
 {
-  "_comment": "Canonical allowlist of the public MCP tools this repo may reference. Mirrors what the hosted server returns from tools/list. Add a tool here only when it is intentionally customer-facing.",
+  "_comment": "Canonical allowlist of the public MCP tools this repo may reference. Mirrors what the hosted server returns from tools/list. Add a tool here only when it is intentionally customer-facing. resultFields lists non-tool snake_case names the docs may mention (fields returned in tool results, OAuth scopes).",
   "tools": [
     "whoami",
     "list_products",
@@ -19,5 +19,9 @@
     "topic",
     "add_keywords",
     "add_research"
+  ],
+  "resultFields": [
+    "offline_access",
+    "out_of_credits"
   ]
 }
