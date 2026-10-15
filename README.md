@@ -6,7 +6,7 @@ MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first u
 
 ## What you get
 
-- The `bloggity` MCP server with 18 tools (see [docs/server.md](docs/server.md)).
+- The `bloggity` MCP server with 19 tools (see [docs/server.md](docs/server.md)).
 - The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits.
 
 ## Scope

@@ -21,7 +21,9 @@ outside what this plugin covers and point to https://bloggity.io.
 ## Start
 
 1. Call `whoami` first. It triggers sign-in if needed, confirms the account,
-   and returns the `plan` and remaining `credits`. If it fails for
+   and returns the `plan`, remaining `credits`, and `publishTimes` (the time of
+   day in UTC that each product's scheduled posts go live; convert it for the
+   user and use it when they ask when something will publish). If it fails for
    authentication, follow "New users and sign-in" below.
 2. Call `list_products` if you need a product id. With several products, group
    everything by product and name the product on each item.
@@ -206,9 +208,11 @@ day (days it does not list are open). To move a post or Research Task, call
 the tool refuses and tells you what is there. Do not pass `swap: true` unless
 the user agreed to trade the two items. Items marked `movable: false` (a post
 being written or already published, research already running or finished) and
-past days cannot be moved; say why and offer an open day instead. To make room
-for something, move the existing item to an open day first, then schedule the
-new one. Show the before and after dates and get a yes before moving several
+past days cannot be moved; say why and offer an open day instead. To trade
+two items' days, call `swap_scheduled` with the two ids (a topic, post or
+Research Task id from `list_schedule`); this needs the user's agreement, since
+both items change day. To make room for something, move the existing item to an
+open day first, then schedule the new one. Show the before and after dates and get a yes before moving several
 items.
 
 **10. After every write.** Confirm what changed in plain words (the date, the
@@ -239,7 +243,7 @@ claim a post is live or written unless a tool result says so.
   says "next available".
 - `dismiss_research_topic` and `backlog_research_topic` with empty `ids` affect
   all pending suggestions. Only do that if the user clearly asked for all.
-- `move_scheduled_item` only changes dates. Never use `swap: true` without the
-  user's agreement, and never move an item to a day in the past.
+- `move_scheduled_item` and `swap_scheduled` only change dates. Never use
+  `swap: true` or `swap_scheduled` without the user's agreement, and never move an item to a day in the past.
 - Use ids exactly as returned by the list tools. Never invent them.
 - Post bodies cannot be written over MCP; point users to the dashboard for that.
