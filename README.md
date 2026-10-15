@@ -1,12 +1,12 @@
 # Bloggity plugin
 
-Manage your [Bloggity](https://bloggity.io) blog from your coding agent. Bloggity plans and publishes SEO blog posts; this plugin connects Claude Code, Cursor, Codex, Grok and any other MCP client to the hosted Bloggity MCP server, so you can review the Tasks queue, schedule posts, accept keyword suggestions and run Research Tasks without leaving your editor.
+Manage your [Bloggity](https://bloggity.io) blog from your coding agent. Bloggity plans and publishes SEO blog posts; this plugin connects Claude Code, Cursor, Codex, Grok and any other MCP client to the hosted Bloggity MCP server, so you can review the Tasks queue, schedule posts, accept keyword suggestions, run Research Tasks and check how your posts are performing without leaving your editor.
 
 MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first use).
 
 ## What you get
 
-- The `bloggity` MCP server with 13 tools (see [docs/server.md](docs/server.md)).
+- The `bloggity` MCP server with 16 tools (see [docs/server.md](docs/server.md)).
 - The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits.
 
 ## Scope
