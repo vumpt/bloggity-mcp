@@ -13,7 +13,10 @@
     "schedule_research_topic",
     "cancel_research_topic",
     "dismiss_research_topic",
-    "backlog_research_topic"
+    "backlog_research_topic",
+    "get_analytics",
+    "get_post_traffic",
+    "rank_posts"
   ],
   "responseFields": [
     "out_of_credits"
