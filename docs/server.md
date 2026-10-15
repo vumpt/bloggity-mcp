@@ -24,7 +24,7 @@ Bloggity backend or frontend code.
 
 OAuth 2.1 with PKCE; sign in with your Bloggity account in the browser.
 
-Scopes: `blog.read` (listing and traffic reports) and `blog.write` (scheduling and accepting
+Scopes: `blog.read` (listing, calendar and traffic reports) and `blog.write` (scheduling, moving and accepting
 suggestions).
 
 You can revoke any connected client under
@@ -40,6 +40,8 @@ Each tool mirrors an action available in the Bloggity dashboard.
 | `list_products` | `blog.read` | List the user's blogs/products |
 | `list_todos` | `blog.read` | The Tasks screen, in the same priority order: topics to schedule, a keyword card when a product is running low on topics (hidden while deferred), and research suggestions awaiting a decision. Optional `productId` |
 | `list_research_topics` | `blog.read` | Research Tasks for a product. Requires `productId` |
+| `list_schedule` | `blog.read` | The calendar for a product: every taken day between two dates with its kind (post or research), title, and whether it can be moved. Days not listed are open. Optional `productId`, `from`, `to` (default today through 30 days ahead, up to 120 days) |
+| `move_scheduled_item` | `blog.write` | Move the post or Research Task scheduled on `fromDate` to `toDate`. If `toDate` is taken, nothing changes unless `swap: true`, which trades the two days. A post's publish date moves with it. Past days, posts being written or already published, and running or finished research cannot be moved. Optional `productId` |
 | `schedule_todo` | `blog.write` | Schedule a topic. `topicId`; optional `date`, `generate` (default false). Returns `out_of_credits` |
 | `set_todo_status` | `blog.write` | `topicId` + `action`: `snooze`, `backlog`, `restore` |
 | `accept_keyword_suggestions` | `blog.write` | Promote suggested (and optional manual) keywords |

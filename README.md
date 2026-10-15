@@ -1,12 +1,12 @@
 # Bloggity plugin
 
-Manage your [Bloggity](https://bloggity.io) blog from your coding agent. Bloggity plans and publishes SEO blog posts; this plugin connects Claude Code, Cursor, Codex, Grok and any other MCP client to the hosted Bloggity MCP server, so you can review the Tasks queue, schedule posts, accept keyword suggestions, run Research Tasks and check how your posts are performing without leaving your editor.
+Manage your [Bloggity](https://bloggity.io) blog from your coding agent. Bloggity plans and publishes SEO blog posts; this plugin connects Claude Code, Cursor, Codex, Grok and any other MCP client to the hosted Bloggity MCP server, so you can review the Tasks queue, schedule and rearrange posts, accept keyword suggestions, run Research Tasks and check how your posts are performing without leaving your editor.
 
 MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first use).
 
 ## What you get
 
-- The `bloggity` MCP server with 16 tools (see [docs/server.md](docs/server.md)).
+- The `bloggity` MCP server with 18 tools (see [docs/server.md](docs/server.md)).
 - The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits.
 
 ## Scope
@@ -79,7 +79,7 @@ After connecting, ask the agent to run `whoami` to trigger sign-in and confirm t
 
 ### Step 2: add the skill
 
-Install `skills/bloggity/SKILL.md` alongside the MCP server. The skill teaches your agent the routine: for every Tasks item it lists, it offers the actions available (schedule, snooze, backlog, accept, defer, dismiss) and asks which to apply, and it checks with you before scheduling or spending credits. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
+Install `skills/bloggity/SKILL.md` alongside the MCP server. The skill teaches your agent the routine: for every Tasks item it lists, it offers the actions available (schedule, move, snooze, backlog, accept, defer, dismiss) and asks which to apply, and it checks with you before scheduling or spending credits. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
 
 ## Data handling
 

@@ -5,6 +5,8 @@
     "list_products",
     "list_todos",
     "list_research_topics",
+    "list_schedule",
+    "move_scheduled_item",
     "schedule_todo",
     "set_todo_status",
     "accept_keyword_suggestions",

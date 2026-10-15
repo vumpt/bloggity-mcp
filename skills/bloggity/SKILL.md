@@ -106,8 +106,8 @@ scheduled tasks. Offer actions by state:
 
 - Proposed: accept (optionally with a date), dismiss, backlog.
 - Available (accepted, unscheduled): schedule on a date (`schedule_research_topic`).
-- Scheduled: cancel to free the day slot (`cancel_research_topic`), or reschedule
-  by cancelling and scheduling again.
+- Scheduled: cancel to free the day slot (`cancel_research_topic`), or move it to
+  another day with `move_scheduled_item`.
 
 ## Traffic and post performance
 
@@ -200,7 +200,18 @@ conversation. Say so if asked to bring back something you cannot see.
 **8. Several products.** Group by product, name the product in every question,
 and never apply an action across products without saying so.
 
-**9. After every write.** Confirm what changed in plain words (the date, the
+**9. Rearranging the calendar.** Call `list_schedule` to see what is on which
+day (days it does not list are open). To move a post or Research Task, call
+`move_scheduled_item` with `fromDate` and `toDate`. If the target day is taken
+the tool refuses and tells you what is there. Do not pass `swap: true` unless
+the user agreed to trade the two items. Items marked `movable: false` (a post
+being written or already published, research already running or finished) and
+past days cannot be moved; say why and offer an open day instead. To make room
+for something, move the existing item to an open day first, then schedule the
+new one. Show the before and after dates and get a yes before moving several
+items.
+
+**10. After every write.** Confirm what changed in plain words (the date, the
 keywords added, the task cancelled). For anything surprising, call
 `list_todos` again and report the new state instead of assuming.
 
@@ -213,7 +224,7 @@ keywords added, the task cancelled). For anything surprising, call
 
 ## What this plugin cannot do
 
-There is no tool to view the published calendar, read or edit post content, see search-engine rankings or Search Console data,
+There is no tool to unschedule a post, read or edit post content, see search-engine rankings or Search Console data,
 change voice, style, domain, or billing settings, or list parked topics. For
 those, send the user to the Bloggity dashboard instead of guessing. Do not
 claim a post is live or written unless a tool result says so.
@@ -228,5 +239,7 @@ claim a post is live or written unless a tool result says so.
   says "next available".
 - `dismiss_research_topic` and `backlog_research_topic` with empty `ids` affect
   all pending suggestions. Only do that if the user clearly asked for all.
+- `move_scheduled_item` only changes dates. Never use `swap: true` without the
+  user's agreement, and never move an item to a day in the past.
 - Use ids exactly as returned by the list tools. Never invent them.
 - Post bodies cannot be written over MCP; point users to the dashboard for that.
