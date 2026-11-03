@@ -68,9 +68,32 @@ it later by upgrading or waiting for the reset. `schedule_todo` and
   schedule items because of low credits, and do not retry.
 - Never set `generate: true` when `credits` is 0, and ask first otherwise.
 
+## Plans and keywords
+
+`whoami` returns the `plan`. A **Free** plan includes **one keyword** per
+product: every post that product writes targets one search. Free accounts
+cannot add keywords, and the tools enforce it, so never promise otherwise.
+
+- A Free `list_todos` has no `add_keywords` card. It has an
+  `upgrade_keywords` card instead when the product has keywords the plan keeps
+  locked. Tell the user plainly: "**9 keywords are locked on the Free plan.**
+  Upgrading on the Search page in the Bloggity dashboard unlocks them, with
+  the search analysis for each." If they ask what the locked ones are, say the
+  locked keywords and their data (searches per month, difficulty) are on that
+  page; MCP does not expose them.
+- If asked to add a keyword on Free, say the plan includes one and point to
+  the Search page, which is where a Free account can change which search it
+  targets. Do not call `accept_keyword_suggestions` to try: it fails, and the
+  fix is on the dashboard, not in the editor.
+- `accept_keyword_suggestions` returns an error on Free that begins "Your plan
+  includes one keyword." Relay it in your own words with the upgrade pointer
+  above; do not retry it and do not offer to add the keywords another way.
+- Suggested post ideas and Research Tasks are not limited by plan, so keep
+  offering those.
+
 ## The Tasks queue: always list, then offer actions
 
-`list_todos` returns three kinds of items. Never dump them as a bare list.
+`list_todos` returns four kinds of items. Never dump them as a bare list.
 Present each with its title and the key facts, then the actions available for
 it, and end by asking what the user wants to do.
 
@@ -78,6 +101,7 @@ it, and end by asking what the user wants to do.
 |---|---|---|---|
 | `topic` | A post topic ready to schedule (shows `nextPublishDate`) | Schedule on the next open day (the date shown), schedule on a date the user picks, snooze until tomorrow, move to backlog | `schedule_todo`, `set_todo_status` (`snooze`, `backlog`) |
 | `add_keywords` | A card of suggested keywords for a product | Accept all, accept selected ones, add their own keywords too, defer until tomorrow | `accept_keyword_suggestions`, `defer_keyword_suggestions` |
+| `upgrade_keywords` | The plan's locked keywords (`lockedKeywords` of them), Free only | None over MCP. Say what they are missing and that upgrading on the Search page in the Bloggity dashboard unlocks them | none |
 | `add_research` | A card of proposed Research Tasks | Accept (optionally scheduling on a date), dismiss, send to the research backlog | `accept_research_topic`, `dismiss_research_topic`, `backlog_research_topic` |
 
 Good shape for a reply:
@@ -93,6 +117,10 @@ Good shape for a reply:
 
 Rules for the follow-up:
 
+- Keyword suggestions may carry `searchVolume`, `keywordDifficulty` and
+  `mainIntent` (from keyword research). Use them to recommend a pick ("takes
+  the most searches") rather than listing the words bare; they are `null` for
+  suggestions the model wrote instead of keyword research found.
 - Ask a concrete question that names the actions. Do not just say "let me know".
 - Offer sensible shortcuts for several items, but confirm before applying one
   action to many items.
@@ -168,7 +196,9 @@ covered and offer `list_research_topics`.
 forecast window that still has nothing scheduled. When the topic queue is
 short, Bloggity adds a keyword card so more topics can be created. Explain
 that link ("you're running low on topics, these keywords will create more")
-rather than presenting the keyword card as unrelated.
+rather than presenting the keyword card as unrelated. On Free there is no
+keyword card: the topic queue can run dry, and the fix is an upgrade (see
+Plans and keywords).
 
 **3. Fill my week.** Propose a plan before acting: topic A on day 1, topic B
 on day 2, and so on, using each product's `nextPublishDate` as the start.
@@ -180,7 +210,8 @@ report the final dates. Do not use `generate: true` here unless asked.
 all, take some, and/or type their own keywords in the same call. Tell them
 new topics are created from accepted keywords and will appear on a later
 `list_todos`, so offer to re-check shortly. Deferring only hides the card
-until tomorrow.
+until tomorrow. This flow is for paid plans only: on Free there is no card,
+and `accept_keyword_suggestions` fails (see Plans and keywords).
 
 **5. Scheduling a topic.** Scheduled posts are written and published
 automatically on their date, with no separate approval step. State the date

@@ -7,7 +7,7 @@ MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first u
 ## What you get
 
 - The `bloggity` MCP server with 19 tools (see [docs/server.md](docs/server.md)).
-- The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits.
+- The `bloggity` skill: it teaches your agent the routine, so it offers the available actions on every Tasks item instead of just listing them, and checks with you before scheduling or spending credits. It also knows your plan: a Free account includes one keyword per blog, so it says what is locked and points to the upgrade instead of trying to add keywords.
 
 ## Scope
 
