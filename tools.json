@@ -27,6 +27,7 @@
   "outputKinds": [
     "topic",
     "add_keywords",
+    "upgrade_keywords",
     "add_research"
   ]
 }
