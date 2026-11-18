@@ -19,15 +19,36 @@
     "backlog_research_topic",
     "get_analytics",
     "get_post_traffic",
-    "rank_posts"
+    "rank_posts",
+    "list_posts",
+    "get_post",
+    "archive_post",
+    "set_post_author",
+    "list_keywords",
+    "add_keyword",
+    "archive_keyword",
+    "get_search_analysis",
+    "list_authors",
+    "add_author",
+    "set_author_mode",
+    "answer_topic_suggestion",
+    "reorder_schedule",
+    "list_notifications",
+    "mark_notifications_read"
   ],
   "responseFields": [
-    "out_of_credits"
+    "out_of_credits",
+    "generating",
+    "plan_limit",
+    "keyword_archived",
+    "keyword_locked",
+    "stillLocked"
   ],
   "outputKinds": [
     "topic",
     "add_keywords",
     "upgrade_keywords",
-    "add_research"
+    "add_research",
+    "suggested_topic"
   ]
 }
