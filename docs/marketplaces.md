@@ -11,6 +11,12 @@ install paths other than the generic remote-MCP config in the README are
 | `.cursor-plugin/plugin.json` | Cursor | `mcp.json`, `skills/` (defaults) | Unpublished |
 | `.codex-plugin/plugin.json`, `.agents/plugins/marketplace.json` | Codex | `agents/codex/.mcp.json`, `skills/` | Unpublished |
 | `.grok-plugin/plugin.json` | Grok Build | `.mcp.json`, `skills/` | Unpublished |
+| hosted server URL | Claude Connectors Directory | `https://mcp.bloggity.io/mcp` | Not submitted |
+| hosted server URL | ChatGPT plugin directory | `https://mcp.bloggity.io/mcp` | Not submitted |
+| `server.json` | Official MCP Registry | `server.json` | Not published |
+| hosted server URL | Smithery | `https://mcp.bloggity.io/mcp` | Not submitted |
+| `glama.json` | Glama | `glama.json`, hosted server URL | Not claimed |
+| hosted server URL | mcp.so | `https://mcp.bloggity.io/mcp` | Not submitted |
 
 Accuracy notes: the Claude Code and Grok layouts were checked against their
 official docs. The Cursor layout follows Cursor's plugin template; the Codex
@@ -53,3 +59,90 @@ endpoints (see README).
 
 Layout and fields follow `.codex-plugin/plugin.json` with an `interface` block.
 Confirm required fields against OpenAI's current plugin docs before listing.
+
+## Shared listing material
+
+- Name: Bloggity (no "MCP" or "plugin" suffix; ChatGPT rejects it).
+- One-liner: "Manage your Bloggity SEO blog: tasks, schedule, keywords, research and post analytics."
+- Docs: <https://bloggity.io/mcp> · Privacy: <https://bloggity.io/privacy> · Terms: <https://bloggity.io/terms>
+- Support: privacy@vumpt.com
+- Logo: `assets/logo.svg` (export a square PNG of at least 512 px for the portals).
+- Test prompts: [test-prompts.md](test-prompts.md).
+- Reviewer account: a dedicated Bloggity account with a blog, posts, a schedule,
+  keywords, research and analytics data, and credits. Password sign-in, no
+  email code. Keep its credentials outside this repo.
+- Do not mention pricing, trials or offers in listing copy (ChatGPT rule).
+
+## Claude Connectors Directory
+
+Source: <https://claude.com/docs/connectors/building/submission>.
+
+1. Add the server as a custom connector in Claude and run every tool once
+   (the portal asks you to confirm this).
+2. Submit from the Claude directory portal (paid Claude plan): server URL,
+   listing (name ≤ 100 chars, one-liner ≤ 200, description ≤ 2,000, 1–5
+   categories, docs URL, privacy URL, support contact, icon, URL slug
+   `bloggity`, which cannot change later), use cases, company, authentication
+   (OAuth, sign-in required), data handling (first-party API), reviewer test
+   steps and credentials, and the seven policy acknowledgements.
+3. The portal syncs tools and flags any tool without a `title` or hints.
+4. Track status at claude.ai/directory/manage; questions to mcp-review@anthropic.com.
+
+## ChatGPT plugin directory
+
+Source: <https://developers.openai.com/plugins/deploy/app-review>.
+
+1. Verify the business (VUMPT Ltd) in the OpenAI Platform dashboard. Use a
+   project with global data residency, not EU.
+2. Create the plugin, enter the server URL and run **Scan Tools**. Annotation
+   changes need a server deploy and a rescan.
+3. Fill in name, logo, description, company URL, privacy URL, OAuth details,
+   reviewer credentials, test prompts with expected responses, and target
+   countries.
+4. After approval, publish as a separate step. Tell press@openai.com before
+   any public announcement.
+
+## Official MCP Registry
+
+Source: <https://registry.modelcontextprotocol.io>. Glama, PulseMCP and
+GitHub's MCP list read from it.
+
+1. Install `mcp-publisher` (release binary from
+   github.com/modelcontextprotocol/registry).
+2. `mcp-publisher login github` as a member of the `vumpt` org (the name
+   `io.github.vumpt/bloggity-mcp` needs it). For an `io.bloggity/...` name,
+   use `mcp-publisher login dns` with a TXT record on bloggity.io instead.
+3. `mcp-publisher publish` from the repo root. Bump `version` in
+   `server.json` for each new publish.
+
+## Smithery
+
+Source: <https://smithery.ai/docs/build/publish>.
+
+1. Go to smithery.ai/new, enter `https://mcp.bloggity.io/mcp`, finish the
+   flow, and sign in when Smithery asks (it scans the tools after sign-in).
+   No `smithery.yaml` or Dockerfile is needed for a URL-published server.
+2. Smithery registers itself with a Client ID Metadata Document, so
+   `smithery.ai` must be on the server's CIMD host allowlist. If sign-in
+   fails, check the server's OAuth log for the rejected CIMD host.
+3. Its scanner sends `User-Agent: SmitheryBot/1.0`; do not block it.
+4. Then Settings → Verification for the official-vendor badge.
+
+## Glama
+
+Sources: <https://glama.ai/blog/2025-07-08-what-is-glamajson>,
+<https://glama.ai/mcp/methodology>.
+
+1. `glama.json` lists the GitHub maintainers who may claim the listing (an
+   org repo cannot be claimed through GitHub login alone).
+2. Find or add the server on glama.ai, then run **Claim**. Run it again after
+   any change to `glama.json`.
+3. Admin → Test Profile: authorise a dedicated test account. Glama only runs
+   `initialize` and the list methods; it never calls tools.
+
+## mcp.so
+
+1. Open <https://mcp.so/submit?type=remote-server>, enter the endpoint URL
+   and the name "Bloggity". mcp.so fetches the tools; review them and submit.
+2. A free listing goes live after review. A paid listing (one-time fee)
+   goes live at once with a verified badge and a dofollow link.
