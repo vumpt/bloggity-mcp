@@ -13,6 +13,22 @@ Bloggity backend or frontend code.
 | Health | `https://mcp.bloggity.io/health` |
 
 
+## Tool annotations
+
+Every tool has a `title` and the MCP behaviour hints `readOnlyHint`,
+`destructiveHint`, `idempotentHint` and `openWorldHint`. Clients use them to
+decide which calls need a confirmation:
+
+- Read tools are read-only. `get_search_analysis` is not, because a repeat
+  analysis costs 1 credit.
+- `archive_post`, `archive_keyword`, `cancel_research_topic` and
+  `dismiss_research_topic` are marked destructive, though each can be undone
+  in the dashboard.
+- `openWorldHint` is false for every tool: each one works only inside your
+  own Bloggity account.
+
+A tool that fails returns an error result with a message you can act on.
+
 ## Connecting
 
 - Streamable HTTP; add the server URL to any MCP client that supports remote

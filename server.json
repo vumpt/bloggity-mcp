@@ -1,0 +1,25 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.vumpt/bloggity-mcp",
+  "title": "Bloggity",
+  "description": "Manage your Bloggity SEO blog: tasks, schedule, keywords, research and post analytics.",
+  "version": "0.3.0",
+  "websiteUrl": "https://bloggity.io/mcp",
+  "repository": {
+    "url": "https://github.com/vumpt/bloggity-mcp",
+    "source": "github"
+  },
+  "icons": [
+    {
+      "src": "https://raw.githubusercontent.com/vumpt/bloggity-mcp/main/assets/logo.svg",
+      "mimeType": "image/svg+xml",
+      "sizes": ["any"]
+    }
+  ],
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.bloggity.io/mcp"
+    }
+  ]
+}
