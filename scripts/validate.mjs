@@ -29,7 +29,11 @@ for (const dir of manifests) {
     if (m[k] && !(await exists(m[k]))) errors.push(`${dir}: ${k} path not found: ${m[k]}`);
   }
 }
-if (versions.size > 1) errors.push(`versions differ across manifests: ${[...versions]}`);
+const registry = await json("server.json");
+if (registry) versions.add(registry.version);
+if (registry && registry.remotes?.[0]?.url !== "https://mcp.bloggity.io/mcp") errors.push("server.json: remotes[0].url must be the hosted MCP URL");
+await json("glama.json");
+if (versions.size > 1) errors.push(`versions differ across manifests and server.json: ${[...versions]}`);
 
 const mcpFiles = [".mcp.json", "mcp.json", "agents/codex/.mcp.json"];
 for (const f of mcpFiles) {

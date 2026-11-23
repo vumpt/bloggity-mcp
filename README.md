@@ -44,7 +44,7 @@ Two steps: connect the server, then add the skill.
 
 ### Step 1: connect the server
 
-Marketplace listings (Claude Code, Cursor, Codex, Grok) are **not published yet**. Until they are, connect Bloggity as a standard remote MCP server. It works in any MCP client that supports HTTP servers with OAuth.
+Connect Bloggity as a standard remote MCP server. It works in any MCP client that supports HTTP servers with OAuth. Directory and marketplace listings are rolling out; see [docs/marketplaces.md](docs/marketplaces.md) for their status.
 
 **Server URL:** `https://mcp.bloggity.io/mcp` (transport: Streamable HTTP; auth: OAuth, browser sign-in on first use)
 
@@ -91,6 +91,16 @@ No Bloggity account yet? The sign-in page that opens on first use has a "no acco
 
 OAuth 2.1 with PKCE. Scopes: `blog.read` for listing, `blog.write` for scheduling and accepting suggestions. Revoke any client at **https://backend.bloggity.io/connected-apps** (sign in with your Bloggity account); access ends immediately.
 
+## Example prompts
+
+- "What's on my Bloggity schedule for the next two weeks?"
+- "Show my Tasks queue and help me work through it."
+- "Which of my posts got the most visits this month?"
+- "Move the post scheduled for Tuesday to Thursday."
+- "Accept the suggested keywords for my blog."
+
+More, with expected results, in [docs/test-prompts.md](docs/test-prompts.md).
+
 ## Safety
 
 - Post bodies cannot be written over MCP; only the Tasks queue, keywords and Research Tasks.
@@ -111,6 +121,9 @@ OAuth 2.1 with PKCE. Scopes: `blog.read` for listing, `blog.write` for schedulin
 | `assets/` | Logo |
 | `docs/` | Server reference, marketplace submission guides |
 | `scripts/validate.mjs` | Manifest validator |
+| `server.json` | Official MCP Registry entry (registry.modelcontextprotocol.io) |
+| `glama.json` | Glama listing ownership |
+| `LICENSE` | MIT licence |
 
 This repo contains no Bloggity backend or frontend code; [docs/server.md](docs/server.md) documents the public interface only.
 
@@ -120,8 +133,14 @@ This repo contains no Bloggity backend or frontend code; [docs/server.md](docs/s
 node scripts/validate.mjs
 ```
 
-Keep `version` identical across all `*-plugin/plugin.json` files. Submission steps per marketplace are in [docs/marketplaces.md](docs/marketplaces.md).
+Keep `version` identical across all `*-plugin/plugin.json` files and `server.json`. Submission steps per marketplace are in [docs/marketplaces.md](docs/marketplaces.md).
+
+## Support, privacy and terms
+
+- Support: [privacy@vumpt.com](mailto:privacy@vumpt.com) or [bloggity.io](https://bloggity.io)
+- Privacy policy: <https://bloggity.io/privacy>
+- Terms: <https://bloggity.io/terms>
 
 ## License
 
-MIT (set in each manifest). Confirm before publishing.
+[MIT](LICENSE) © VUMPT Ltd.
