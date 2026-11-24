@@ -26,7 +26,8 @@ decide which calls need a confirmation:
   in the dashboard.
 - `openWorldHint` is false for every account tool: each one works only
   inside your own Bloggity account. `preview_brand` is open-world and
-  read-only: it reads the public landing page you give it.
+  read-only: it reads the public landing page you give it. `get_started` is
+  read-only and reads no account data.
 
 A tool that fails returns an error result with a message you can act on.
 
@@ -34,8 +35,10 @@ A tool that fails returns an error result with a message you can act on.
 
 - Streamable HTTP; add the server URL to any MCP client that supports remote
   servers.
-- Tool discovery works before sign-in. `preview_brand` also works before
-  sign-in, so people without an account can try Bloggity. Every other tool
+- Tool discovery works before sign-in. `get_started` and `preview_brand` also
+  work before sign-in, so people without an account can try Bloggity. The
+  server also offers two prompts that work before sign-in: `get-started` and
+  `preview-my-brand`. Every other tool
   requires signing in, and your client will prompt you through the browser.
 
 ## Authentication
@@ -56,6 +59,7 @@ Each tool mirrors an action available in the Bloggity dashboard.
 
 | Tool | Scope | Description |
 |---|---|---|
+| `get_started` | none (no sign-in) | Start here to set up or try Bloggity. Returns `signedIn`, `signUpUrl` and `nextStep`. Clients that show cards ask if you have an account, and let you preview your brand in the card |
 | `preview_brand` | none (no sign-in) | Read a landing page you give (`url`) and return what Bloggity sees: `name`, one-line `description`, 3 `colors`, 3 `tone` words, the page `theme`, and `signUpUrl`, a sign-up link that starts onboarding with that page. Nothing is saved. Cached for 24 hours and rate limited |
 | `whoami` | token only | Stable user id, name, email, nickname, plus `plan`, `credits` (1 credit per written post, per Research Task, per keyword added from the keyword card, and per repeat search analysis), `monthlyCredits`, `nextResetAt`, and `publishTimes` (for each product, the time of day in UTC that scheduled posts go live). Call first to trigger sign-in |
 | `list_products` | `blog.read` | List the user's blogs/products |
