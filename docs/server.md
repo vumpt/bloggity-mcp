@@ -24,8 +24,9 @@ decide which calls need a confirmation:
 - `archive_post`, `archive_keyword`, `cancel_research_topic` and
   `dismiss_research_topic` are marked destructive, though each can be undone
   in the dashboard.
-- `openWorldHint` is false for every tool: each one works only inside your
-  own Bloggity account.
+- `openWorldHint` is false for every account tool: each one works only
+  inside your own Bloggity account. `preview_brand` is open-world and
+  read-only: it reads the public landing page you give it.
 
 A tool that fails returns an error result with a message you can act on.
 
@@ -33,8 +34,9 @@ A tool that fails returns an error result with a message you can act on.
 
 - Streamable HTTP; add the server URL to any MCP client that supports remote
   servers.
-- Tool discovery works before sign-in. Calling a tool requires signing in, and
-  your client will prompt you through the browser.
+- Tool discovery works before sign-in. `preview_brand` also works before
+  sign-in, so people without an account can try Bloggity. Every other tool
+  requires signing in, and your client will prompt you through the browser.
 
 ## Authentication
 
@@ -54,6 +56,7 @@ Each tool mirrors an action available in the Bloggity dashboard.
 
 | Tool | Scope | Description |
 |---|---|---|
+| `preview_brand` | none (no sign-in) | Read a landing page you give (`url`) and return what Bloggity sees: `name`, one-line `description`, 3 `colors`, 3 `tone` words, the page `theme`, and `signUpUrl`, a sign-up link that starts onboarding with that page. Nothing is saved. Cached for 24 hours and rate limited |
 | `whoami` | token only | Stable user id, name, email, nickname, plus `plan`, `credits` (1 credit per written post, per Research Task, per keyword added from the keyword card, and per repeat search analysis), `monthlyCredits`, `nextResetAt`, and `publishTimes` (for each product, the time of day in UTC that scheduled posts go live). Call first to trigger sign-in |
 | `list_products` | `blog.read` | List the user's blogs/products |
 | `list_todos` | `blog.read` | The Tasks screen, in the same priority order: topics to schedule, a keyword card when a product is running low on topics (hidden while deferred), an upgrade card when the plan has locked keywords (Free), research suggestions awaiting a decision, and suggested posts drafted from research the user marked important (`suggested_topic`, with the reason). Optional `productId` |
@@ -105,6 +108,9 @@ Writing or editing post text is deliberately not exposed over MCP.
 - Requests go only to `mcp.bloggity.io` (tools) and `backend.bloggity.io` (OAuth).
 - Every query is scoped to the authenticated user's team; a token can only touch
   that team's data.
+- `preview_brand` fetches only the public page URL you give it (and up to 3 of
+  its stylesheets). It stores no account data; the result is cached for 24
+  hours by URL.
 - The optional `X-Source-Name` header (`claude-plugin`, `cursor-plugin`, ...)
   names the connector for identification only; it does not affect access. No other client data is sent.
 - Tokens are never logged.
