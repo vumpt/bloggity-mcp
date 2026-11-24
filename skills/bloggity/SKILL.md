@@ -20,13 +20,40 @@ outside what this plugin covers and point to https://bloggity.io.
 
 ## Start
 
-1. Call `whoami` first. It triggers sign-in if needed, confirms the account,
+1. If you do not know yet whether the user has a Bloggity account, and they
+   are not signed in, ask: "Do you already have a Bloggity account?"
+   - **No** (or they just want to try it): follow "No account yet: brand
+     preview" below. Do not start sign-in.
+   - **Yes**: continue with step 2.
+2. Call `whoami`. It triggers sign-in if needed, confirms the account,
    and returns the `plan`, remaining `credits`, and `publishTimes` (the time of
    day in UTC that each product's scheduled posts go live; convert it for the
    user and use it when they ask when something will publish). If it fails for
    authentication, follow "New users and sign-in" below.
-2. Call `list_products` if you need a product id. With several products, group
+3. Call `list_products` if you need a product id. With several products, group
    everything by product and name the product on each item.
+
+## No account yet: brand preview
+
+`preview_brand` is the only tool that works without signing in. It shows a new
+user what Bloggity understands about their product before they sign up.
+
+1. Ask for their product's landing page URL ("Send me your product's landing
+   page and I'll show you what Bloggity sees").
+2. Call `preview_brand` with `url`. It reads the page and returns `name`,
+   `description`, 3 `colors` (hex), 3 `tone` words, and `signUpUrl`.
+3. Show the result as a short card: the name, the one-line description, the
+   three colours (with their hex codes) and the tone words. Say this is how
+   Bloggity would match its posts to their brand.
+4. If the read is wrong (a different product, a parked page), offer to try
+   another page of the same site, such as `/about` or `/pricing`.
+5. Offer `signUpUrl`: "Create your free Bloggity account here and Bloggity
+   builds your blog from this page." Give the link exactly as returned; it
+   carries their URL into onboarding.
+6. If they sign up and come back, continue with `whoami` (Start, step 2).
+
+If `preview_brand` returns an error, show its message. It is never a sign-in
+problem, so do not ask the user to sign in because of it.
 
 ## New users and sign-in
 

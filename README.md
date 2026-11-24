@@ -77,6 +77,8 @@ codex mcp add bloggity --url https://mcp.bloggity.io/mcp
 
 After connecting, ask the agent to run `whoami` to trigger sign-in and confirm the account, then add the skill (see below).
 
+**No Bloggity account yet?** You can try it before signing up: give the agent your product's landing page and ask for a brand preview (`preview_brand`). It shows what Bloggity reads from your page (name, description, colours, tone) and gives you a sign-up link that starts onboarding with that page. No sign-in is needed for this tool.
+
 ### Step 2: add the skill
 
 Install `skills/bloggity/SKILL.md` alongside the MCP server. The skill teaches your agent the routine: for every Tasks item it lists, it offers the actions available (schedule, move, snooze, backlog, accept, defer, dismiss) and asks which to apply, and it checks with you before scheduling or spending credits. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
