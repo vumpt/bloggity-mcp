@@ -77,7 +77,7 @@ codex mcp add bloggity --url https://mcp.bloggity.io/mcp
 
 After connecting, ask the agent to run `whoami` to trigger sign-in and confirm the account, then add the skill (see below).
 
-**No Bloggity account yet?** You can try it before signing up: give the agent your product's landing page and ask for a brand preview (`preview_brand`). It shows what Bloggity reads from your page (name, description, colours, tone) and gives you a sign-up link that starts onboarding with that page. No sign-in is needed for this tool.
+**No Bloggity account yet?** You can try it before signing up: ask the agent to set up Bloggity (`get_started`), or give it your product's landing page and ask for a brand preview (`preview_brand`). It shows what Bloggity reads from your page (name, description, colours, tone) and gives you a sign-up link that starts onboarding with that page. No sign-in is needed for this tool.
 
 ### Step 2: add the skill
 

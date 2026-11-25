@@ -1,6 +1,6 @@
 ---
 name: bloggity
-description: Operate a Bloggity blog through the Bloggity MCP server. Use whenever the user mentions Bloggity, their blog Tasks/TODOs, post topics, posts, keywords, Google search analysis, authors, Research Tasks, notifications, or how their blog or posts are performing (traffic, views, clicks). Companion to the Bloggity MCP tools: it defines what to do after listing items.
+description: Operate a Bloggity blog through the Bloggity MCP server. Use whenever the user mentions Bloggity, asks to set up, start or try Bloggity, their blog Tasks/TODOs, post topics, posts, keywords, Google search analysis, authors, Research Tasks, notifications, or how their blog or posts are performing (traffic, views, clicks). Companion to the Bloggity MCP tools: it defines what to do after listing items.
 ---
 
 # Bloggity
@@ -20,11 +20,18 @@ outside what this plugin covers and point to https://bloggity.io.
 
 ## Start
 
-1. If you do not know yet whether the user has a Bloggity account, and they
-   are not signed in, ask: "Do you already have a Bloggity account?"
+1. When the user asks to set up, start or try Bloggity, or you do not know yet
+   whether they have a Bloggity account, call `get_started` first. It needs no
+   sign-in. It returns `signedIn` and `nextStep`.
+   - In clients that show cards, the user sees a card that asks "Do you
+     already have a Bloggity account?" and can preview their brand in the
+     card. Reply in one short sentence and wait for the user. Do not ask the
+     same question in text.
+   - In text-only clients, and when `signedIn` is false, ask: "Do you already
+     have a Bloggity account?"
    - **No** (or they just want to try it): follow "No account yet: brand
      preview" below. Do not start sign-in.
-   - **Yes**: continue with step 2.
+   - **Yes**, or `signedIn` is true: continue with step 2.
 2. Call `whoami`. It triggers sign-in if needed, confirms the account,
    and returns the `plan`, remaining `credits`, and `publishTimes` (the time of
    day in UTC that each product's scheduled posts go live; convert it for the
@@ -42,9 +49,12 @@ user what Bloggity understands about their product before they sign up.
    page and I'll show you what Bloggity sees").
 2. Call `preview_brand` with `url`. It reads the page and returns `name`,
    `description`, 3 `colors` (hex), 3 `tone` words, and `signUpUrl`.
-3. Show the result as a short card: the name, the one-line description, the
-   three colours (with their hex codes) and the tone words. Say this is how
-   Bloggity would match its posts to their brand.
+3. In clients that show cards, the user already sees the result as a card
+   with a "build my blog" button. Do not repeat it: reply in one or two
+   sentences and give `signUpUrl`. In text-only clients, show the name, the
+   one-line description, the three colours (with their hex codes) and the
+   tone words, and say this is how Bloggity would match its posts to their
+   brand.
 4. If the read is wrong (a different product, a parked page), offer to try
    another page of the same site, such as `/about` or `/pricing`.
 5. Offer `signUpUrl`: "Create your free Bloggity account here and Bloggity
@@ -54,6 +64,10 @@ user what Bloggity understands about their product before they sign up.
 
 If `preview_brand` returns an error, show its message. It is never a sign-in
 problem, so do not ask the user to sign in because of it.
+
+If any other tool fails because the user is not signed in, and they have not
+said that they have an account, offer the brand preview before you ask them
+to sign in.
 
 ## New users and sign-in
 
