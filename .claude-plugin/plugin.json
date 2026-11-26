@@ -19,7 +19,7 @@
     "research",
     "scheduling"
   ],
-  "icon": "./assets/logo.svg",
+  "icon": "./assets/logo.png",
   "documentationUrl": "https://bloggity.io/mcp",
   "supportUrl": "https://github.com/vumpt/bloggity-mcp/issues",
   "privacyPolicyUrl": "https://bloggity.io/privacy",

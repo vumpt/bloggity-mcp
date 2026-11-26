@@ -11,9 +11,9 @@
   },
   "icons": [
     {
-      "src": "https://raw.githubusercontent.com/vumpt/bloggity-mcp/main/assets/logo.svg",
-      "mimeType": "image/svg+xml",
-      "sizes": ["any"]
+      "src": "https://raw.githubusercontent.com/vumpt/bloggity-mcp/main/assets/logo.png",
+      "mimeType": "image/png",
+      "sizes": ["512x512"]
     }
   ],
   "remotes": [
