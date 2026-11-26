@@ -66,7 +66,7 @@ Confirm required fields against OpenAI's current plugin docs before listing.
 - One-liner: "Manage your Bloggity SEO blog: tasks, schedule, keywords, research and post analytics."
 - Docs: <https://bloggity.io/mcp> · Privacy: <https://bloggity.io/privacy> · Terms: <https://bloggity.io/terms>
 - Support: privacy@vumpt.com
-- Logo: `assets/logo.svg` (export a square PNG of at least 512 px for the portals).
+- Logo: `assets/logo.png` (512 × 512 PNG, transparent corners). Use it for every portal.
 - Test prompts: [test-prompts.md](test-prompts.md).
 - Reviewer account: a dedicated Bloggity account with a blog, posts, a schedule,
   keywords, research and analytics data, and credits. Password sign-in, no

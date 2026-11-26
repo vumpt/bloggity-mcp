@@ -18,8 +18,8 @@
     "capabilities": ["Interactive", "Read", "Write"],
     "websiteURL": "https://bloggity.io",
     "brandColor": "#111827",
-    "logo": "./assets/logo.svg",
-    "composerIcon": "./assets/logo.svg",
+    "logo": "./assets/logo.png",
+    "composerIcon": "./assets/logo.png",
     "defaultPrompt": [
       "Show my Bloggity Tasks queue",
       "Schedule my next Bloggity topic on the next open day",
