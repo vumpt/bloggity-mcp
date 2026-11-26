@@ -1,6 +1,6 @@
 ---
 name: bloggity
-description: Operate a Bloggity blog through the Bloggity MCP server. Use whenever the user mentions Bloggity, asks to set up, start or try Bloggity, their blog Tasks/TODOs, post topics, posts, keywords, Google search analysis, authors, Research Tasks, notifications, or how their blog or posts are performing (traffic, views, clicks). Companion to the Bloggity MCP tools: it defines what to do after listing items.
+description: Use when the user wants to set up, start or try Bloggity, asks what Bloggity would do for their product, or has no Bloggity account yet: call get_started first and offer a brand preview of their landing page before any sign-in. Also use whenever the user mentions their Bloggity blog, Tasks or TODOs, post topics, posts, the publishing schedule, keywords, Google search analysis, authors, Research Tasks, notifications, or how their blog or posts are performing (traffic, views, clicks). It defines what to do after listing items and when to ask before acting.
 ---
 
 # Bloggity

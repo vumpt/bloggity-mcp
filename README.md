@@ -13,6 +13,16 @@ MCP server: `https://mcp.bloggity.io/mcp` (OAuth 2.1, browser sign-in on first u
 
 This repo and plugin are for public, customer-facing use of Bloggity through its documented MCP tools (listed in [`tools.json`](tools.json)). Agents are instructed (see [`AGENTS.md`](AGENTS.md) and the skill) not to describe or probe Bloggity internals.
 
+## Install in Claude
+
+In Claude Code:
+
+```
+/plugin install bloggity --marketplace vumpt/bloggity-mcp
+```
+
+On claude.ai and in Cowork, install **Bloggity** from the Claude Directory. The plugin adds the Bloggity connector and the Bloggity skill. Sign-in starts on first use; you can try the brand preview before you have an account.
+
 ## Set up with your agent
 
 Copy this prompt into your coding agent (Claude Code, Cursor, Codex, Grok or any MCP-capable agent) and it will set Bloggity up for you:
@@ -82,6 +92,12 @@ After connecting, ask the agent to run `whoami` to trigger sign-in and confirm t
 ### Step 2: add the skill
 
 Install `skills/bloggity/SKILL.md` alongside the MCP server. The skill teaches your agent the routine: for every Tasks item it lists, it offers the actions available (schedule, move, snooze, backlog, accept, defer, dismiss) and asks which to apply, and it checks with you before scheduling or spending credits. Plugin installs bundle it automatically; with a plain MCP install, copy the `skills/bloggity/` folder into your agent's skills directory (for example `.claude/skills/` or `.agents/skills/`), or paste its contents into your agent instructions file.
+
+## What this plugin runs, sends and fetches
+
+- **Runs:** nothing on your computer. There are no commands, hooks, scripts or local servers. The plugin is one skill (instructions in Markdown) and one remote MCP server entry.
+- **Sends:** tool calls go to `https://mcp.bloggity.io/mcp`, and sign-in goes to `backend.bloggity.io`. The server entry adds one header, `X-Source-Name: bloggity-plugin`, so Bloggity can tell which client connected. It carries no credentials.
+- **Fetches:** when you ask for a brand preview, the Bloggity server reads the landing page URL that you give it. No other third-party fetches are made by the plugin.
 
 ## Data handling
 

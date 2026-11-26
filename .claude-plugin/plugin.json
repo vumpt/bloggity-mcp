@@ -2,10 +2,26 @@
   "name": "bloggity",
   "displayName": "Bloggity",
   "version": "0.3.0",
-  "description": "Manage your Bloggity blog from your coding agent: review the Tasks queue, schedule posts, accept keyword suggestions, and run Research Tasks over the Bloggity MCP server.",
-  "author": { "name": "Bloggity", "url": "https://bloggity.io" },
+  "description": "Try Bloggity before you sign up with a brand preview of your landing page, then run your SEO blog from chat: work through the Tasks queue, schedule and move posts, add keywords, run Research Tasks and check post performance.",
+  "author": {
+    "name": "Bloggity",
+    "url": "https://bloggity.io"
+  },
   "homepage": "https://bloggity.io",
   "repository": "https://github.com/vumpt/bloggity-mcp",
   "license": "MIT",
-  "keywords": ["bloggity", "blog", "seo", "content", "research", "mcp"]
+  "keywords": [
+    "bloggity",
+    "blog",
+    "seo",
+    "content",
+    "keywords",
+    "research",
+    "scheduling"
+  ],
+  "icon": "./assets/logo.svg",
+  "documentationUrl": "https://bloggity.io/mcp",
+  "supportUrl": "https://github.com/vumpt/bloggity-mcp/issues",
+  "privacyPolicyUrl": "https://bloggity.io/privacy",
+  "termsOfServiceUrl": "https://bloggity.io/terms"
 }
