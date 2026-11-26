@@ -88,6 +88,26 @@ Source: <https://claude.com/docs/connectors/building/submission>.
 3. The portal syncs tools and flags any tool without a `title` or hints.
 4. Track status at claude.ai/directory/manage; questions to mcp-review@anthropic.com.
 
+### Plugin bundle (connector + skill)
+
+Source: <https://claude.com/docs/plugins/submit> and
+<https://claude.com/docs/directory/publish>. Anthropic asks for a remote MCP
+server to be submitted as an MCP connector even when a plugin references it,
+so Bloggity is two submissions that are paired into one listing:
+
+1. Submit the MCP connector (above).
+2. In the same portal, choose **Plugin bundle**. Repository
+   `vumpt/bloggity-mcp`, plugin path empty (the repo root), branch `main`.
+   The listing is read from `.claude-plugin/plugin.json` (`displayName`,
+   `description`, `icon`, `documentationUrl`, `supportUrl`,
+   `privacyPolicyUrl`, `termsOfServiceUrl`) and `README.md`.
+3. Data handling: reads account data through the connector only; sends
+   nothing to other services; keeps no data itself; not for under-18s.
+4. Pair the plugin with the connector listing (same organization, same URL
+   in `.mcp.json`).
+5. Run `claude plugin validate .` before you submit. The repo must be public
+   before the listing goes live.
+
 ## ChatGPT plugin directory
 
 Source: <https://developers.openai.com/plugins/deploy/app-review>.
